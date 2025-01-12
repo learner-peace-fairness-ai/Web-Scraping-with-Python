@@ -2,7 +2,6 @@ from urllib.request import urlopen
 import ssl
 import certifi
 from bs4 import BeautifulSoup
-import re
 
 context = ssl.create_default_context(cafile=certifi.where())
 html = urlopen(
