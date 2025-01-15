@@ -15,14 +15,16 @@ def get_links(page_url):
     soup = BeautifulSoup(html, 'html.parser')
 
     for link in soup.find_all('a', href=re.compile('^(/wiki/)')):
-        if 'href' in link.attrs:
-            if link['href'] not in pages:
-                # 新しいページに出会った
-                new_page = link['href']
-                print(new_page)
-                pages.add(new_page)
+        if 'href' not in link.attrs:
+            continue
 
-                get_links(new_page)
+        if link['href'] not in pages:
+            # 新しいページに出会った
+            new_page = link['href']
+            print(new_page)
+            pages.add(new_page)
+
+            get_links(new_page)
 
 
 get_links('')
