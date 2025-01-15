@@ -1,23 +1,22 @@
-from urllib.request import urlopen
-from urllib.error import HTTPError
-import ssl
-import certifi
+import requests
+from requests.exceptions import HTTPError
 from bs4 import BeautifulSoup
 
 
 def get_title(url):
-    context = ssl.create_default_context(cafile=certifi.where())
-
     try:
-        html = urlopen(url, context=context)
+        response = requests.get(url)
     except HTTPError as e:
         print(e)
         return None
 
+    html = response.text
+
     try:
-        bsObj = BeautifulSoup(html.read(), 'html.parser')
-        title = bsObj.body.h1
-    except AttributeError:
+        soup = BeautifulSoup(html, 'html.parser')
+        title = soup.body.h1
+    except AttributeError as e:
+        print(e)
         return None
 
     return title
