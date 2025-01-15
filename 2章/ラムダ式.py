@@ -8,5 +8,4 @@ html = response.text
 soup = BeautifulSoup(html, 'html.parser')
 
 tag_list = soup.findAll(lambda tag: len(tag.attrs) == 2)
-for tag in tag_list:
-    print(tag)
+print(len(tag_list))
