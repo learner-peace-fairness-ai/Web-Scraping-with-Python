@@ -1,8 +1,5 @@
-from urllib.request import urlopen
-from urllib.error import HTTPError
+import requests
 from urllib.parse import urlparse
-import ssl
-import certifi
 from bs4 import BeautifulSoup
 import re
 import datetime
@@ -48,8 +45,8 @@ def get_external_links(soup, exclude_url):
 
 
 def get_random_external_link(starting_page):
-    context = ssl.create_default_context(cafile=certifi.where())
-    html = urlopen(starting_page, context=context)
+    response = requests.get(starting_page)
+    html = response.text
     soup = BeautifulSoup(html, 'html.parser')
 
     scheme = urlparse(starting_page).scheme
@@ -61,8 +58,7 @@ def get_random_external_link(starting_page):
         domain = f'{scheme}://{network_location}'
 
         internal_links = get_internal_links(soup, domain)
-        internal_link = internal_links[random.randint(
-            0, len(internal_links) - 1)]
+        internal_link = internal_links[random.randint(0, len(internal_links) - 1)]
         return get_random_external_link(internal_link)
     else:
         return external_links[random.randint(0, len(external_links) - 1)]
