@@ -1,9 +1,10 @@
-import requests
-from urllib.parse import urlparse
-from bs4 import BeautifulSoup
 import re
 import datetime
 import random
+
+import requests
+from urllib.parse import urlparse
+from bs4 import BeautifulSoup
 
 pages = set()
 random.seed(datetime.datetime.now().timestamp())
