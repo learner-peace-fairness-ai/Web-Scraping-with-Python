@@ -1,8 +1,9 @@
-import requests
-from bs4 import BeautifulSoup
 import datetime
 import random
 import re
+
+import requests
+from bs4 import BeautifulSoup
 
 random.seed(datetime.datetime.now().timestamp())
 
