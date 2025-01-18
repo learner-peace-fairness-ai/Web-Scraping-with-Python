@@ -1,6 +1,7 @@
+import re
+
 import requests
 from bs4 import BeautifulSoup
-import re
 
 URL = 'https://en.wikipedia.org/wiki/Kevin_Bacon'
 
