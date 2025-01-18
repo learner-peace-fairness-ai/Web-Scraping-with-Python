@@ -1,6 +1,7 @@
+import re
+
 import requests
 from bs4 import BeautifulSoup
-import re
 
 URL = 'https://pythonscraping.com/pages/page3.html'
 
