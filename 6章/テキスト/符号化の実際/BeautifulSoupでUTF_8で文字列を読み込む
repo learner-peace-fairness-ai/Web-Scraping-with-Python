@@ -1,0 +1,26 @@
+from bs4 import BeautifulSoup
+import requests
+
+
+def get_encoding(soup):
+    meta_charset = soup.select_one('meta[charset]')
+    encoding = meta_charset.get('charset') if meta_charset else None
+
+    meta_content = soup.select_one('meta[http-equiv="Content-Type"]')
+    if meta_content:
+        content = meta_content.get('content', '').lower()
+        if 'charset=' in content:
+            encoding = content.split("charset=")[-1]
+    return encoding
+
+
+res = requests.get('https://en.wikipedia.org/wiki/Python_(programming_language)')
+html = res.text
+soup = BeautifulSoup(html, 'html.parser')
+
+content = soup.select_one('#mw-content-text').get_text()
+
+encoding = get_encoding(soup)
+content = bytes(content, encoding)
+content = content.decode(encoding)
+print(content)
