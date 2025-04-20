@@ -1,0 +1,18 @@
+<script>
+  const fibonacci = function () {
+    let a = 1;
+    let b = 1;
+
+    return function () {
+      let temp = b;
+      b += a;
+      a = temp;
+      return b;
+    };
+  };
+
+  const fibInstance = fibonacci();
+  console.log(`${fibInstance()} is in the Fibonacci sequence`);
+  console.log(`${fibInstance()} is in the Fibonacci sequence`);
+  console.log(`${fibInstance()} is in the Fibonacci sequence`);
+</script>

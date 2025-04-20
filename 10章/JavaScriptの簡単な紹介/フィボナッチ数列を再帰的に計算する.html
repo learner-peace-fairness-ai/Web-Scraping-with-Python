@@ -1,0 +1,11 @@
+<script>
+  function fibonacci(a, b) {
+    const nextNum = a + b;
+    console.log(`${nextNum} is in the Fibonacci sequence`);
+    if (nextNum < 100) {
+      fibonacci(b, nextNum);
+    }
+  }
+
+  fibonacci(1, 1);
+</script>
