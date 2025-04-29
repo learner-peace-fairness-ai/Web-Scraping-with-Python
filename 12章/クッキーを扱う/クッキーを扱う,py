@@ -1,0 +1,21 @@
+from selenium import webdriver
+
+URL = "https://pythonscraping.com"
+
+with webdriver.Edge() as driver1:
+    driver1.get(URL)
+    # 何かしらの操作
+    print(driver1.get_cookies())
+
+    saved_cookies = driver1.get_cookies()
+
+with webdriver.Edge() as driver2:
+    driver2.get(URL)
+    driver2.delete_all_cookies()
+    
+    # driver1の状況を再現する
+    for cookie in saved_cookies:
+        driver2.add_cookie(cookie)
+    driver2.refresh()
+
+    print(driver2.get_cookies())
